@@ -19,6 +19,9 @@
     claude-code
     tree
     starship
+    lazygit
+    gitui
+    tig
 
     # Hyprland ecosystem
     waybar

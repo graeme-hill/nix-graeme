@@ -1,1 +1,1 @@
-sudo nvim ~/nix-graeme/modules/system/packages.nix
+nvim ~/nix-graeme/modules/system/packages.nix
