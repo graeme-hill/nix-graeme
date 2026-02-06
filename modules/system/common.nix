@@ -4,6 +4,12 @@
   # Hostname from flake
   networking.hostName = hostname;
 
+  # Networking
+  networking.networkmanager.enable = true;
+
+  # Firmware (required for WiFi, Bluetooth, etc.)
+  hardware.enableRedistributableFirmware = true;
+
   # Bootloader
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
