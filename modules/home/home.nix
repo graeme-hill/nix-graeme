@@ -29,6 +29,9 @@
     enable = true;
   };
 
+  # SSH agent (systemd user service)
+  services.ssh-agent.enable = true;
+
   # Link dotfiles
   home.file = {
     ".config/hypr/hyprland.conf" = {
