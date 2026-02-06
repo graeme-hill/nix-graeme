@@ -30,7 +30,6 @@
     dunst
     mako
     swww
-    hyprpaper
     hyprlock
     hypridle
     hyprshot
