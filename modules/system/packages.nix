@@ -22,6 +22,7 @@
     lazygit
     gitui
     tig
+    ripgrep
 
     # Hyprland ecosystem
     waybar
