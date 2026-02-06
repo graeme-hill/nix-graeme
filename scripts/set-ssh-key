@@ -1,0 +1,148 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# bw-ssh-switch: Unlock Bitwarden, pick SSH key(s), load into ssh-agent.
+
+need() { command -v "$1" >/dev/null 2>&1 || { echo "Missing dependency: $1" >&2; exit 1; }; }
+
+need bw
+need jq
+need ssh-add
+
+have_fzf=0
+if command -v fzf >/dev/null 2>&1; then
+  have_fzf=1
+fi
+
+start_agent_if_needed() {
+  # If SSH_AUTH_SOCK isn't set, start a fresh agent in THIS shell.
+  if [[ -z "${SSH_AUTH_SOCK:-}" ]] || ! ssh-add -l >/dev/null 2>&1; then
+    if command -v ssh-agent >/dev/null 2>&1; then
+      eval "$(ssh-agent -s)" >/dev/null
+    else
+      echo "ssh-agent not found. Install OpenSSH client tools." >&2
+      exit 1
+    fi
+  fi
+}
+
+ensure_logged_in() {
+  local status
+  status="$(bw status | jq -r '.status')"
+  if [[ "$status" == "unauthenticated" ]]; then
+    echo "Bitwarden CLI is not logged in. Running: bw login"
+    bw login
+  fi
+}
+
+unlock_vault() {
+  # Prompts for your master password (and 2FA if enabled).
+  export BW_SESSION
+  # Read password interactively, then pass to bw unlock
+  read -rsp "Master password: " master_pw
+  echo
+  BW_SESSION="$(printf '%s' "$master_pw" | bw unlock --raw --passwordfile /dev/stdin)"
+  unset master_pw
+  if [[ -z "$BW_SESSION" ]]; then
+    echo "Failed to unlock Bitwarden vault." >&2
+    exit 1
+  fi
+}
+
+list_ssh_key_items() {
+  # Returns TSV lines: name<TAB>id
+  # We filter items that look like SSH Key items (have .sshKey.privateKey).
+  bw sync >/dev/null 2>&1 || true
+  bw list items \
+    | jq -r '
+        map(select(.sshKey? and (.sshKey.privateKey? != null)))
+        | sort_by(.name)
+        | .[]
+        | (.name // "Unnamed") + "\t" + .id
+      '
+}
+
+pick_items() {
+  local items_tsv="$1"
+
+  if [[ -z "$items_tsv" ]]; then
+    echo "No SSH keys found in your vault."
+    echo "Make sure your keys are stored as Bitwarden 'SSH Key' items."
+    exit 0
+  fi
+
+  if [[ $have_fzf -eq 1 ]]; then
+    echo "$items_tsv" \
+      | fzf --multi \
+            --prompt="Select SSH key(s) to load > " \
+            --with-nth=1 \
+            --delimiter=$'\t' \
+      | awk -F $'\t' '{print $2}'
+  else
+    # Fallback: numbered menu (single-select)
+    mapfile -t lines < <(printf "%s\n" "$items_tsv")
+    echo "Select an SSH key to load:"
+    local i=1
+    for line in "${lines[@]}"; do
+      printf "  %d) %s\n" "$i" "$(cut -f1 <<<"$line")"
+      i=$((i+1))
+    done
+    printf "Enter number: "
+    read -r choice
+    if ! [[ "$choice" =~ ^[0-9]+$ ]] || (( choice < 1 || choice > ${#lines[@]} )); then
+      echo "Invalid selection." >&2
+      exit 1
+    fi
+    cut -f2 <<<"${lines[$((choice-1))]}"
+  fi
+}
+
+clear_agent_keys() {
+  # Remove all currently-loaded keys from this agent
+  ssh-add -D >/dev/null 2>&1 || true
+}
+
+add_key_to_agent_by_id() {
+  local id="$1"
+  # Pull the private key and pipe into ssh-add
+  bw get item "$id" \
+    | jq -r '.sshKey.privateKey' \
+    | ssh-add - >/dev/null
+}
+
+show_agent_keys() {
+  echo
+  echo "Keys currently loaded in ssh-agent:"
+  ssh-add -l || true
+}
+
+main() {
+  start_agent_if_needed
+  ensure_logged_in
+  unlock_vault
+
+  # Get SSH key items
+  items="$(list_ssh_key_items)"
+
+  # Pick one or more IDs
+  mapfile -t selected_ids < <(pick_items "$items")
+
+  if (( ${#selected_ids[@]} == 0 )); then
+    echo "No selection made. Exiting."
+    exit 0
+  fi
+
+  # Replace keys in the agent with the new selection
+  clear_agent_keys
+
+  for id in "${selected_ids[@]}"; do
+    add_key_to_agent_by_id "$id"
+  done
+
+  show_agent_keys
+  echo
+  echo "✅ Done. Re-run this script anytime to switch which keys are active."
+}
+
+main "$@"
+
