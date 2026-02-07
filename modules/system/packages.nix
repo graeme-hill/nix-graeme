@@ -15,6 +15,7 @@
     bitwarden-cli
     bitwarden-desktop
     neovim
+    gcc
     jq
     claude-code
     tree
