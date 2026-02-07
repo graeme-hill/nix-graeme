@@ -7,3 +7,8 @@ here and to make any changes you edit it in this repo, then run the `switch` com
 
 System packages, network config, and dotfiles (via home manager) are all controlled from
 here.
+
+## Secrets management
+
+There is a tool in in scripts/ called `install-age-key` that allows the user to get their
+age key from bitwarden. Then secrets are decrypted using that key and sops-nix.
