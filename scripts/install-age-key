@@ -1,0 +1,128 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# install-age-key: Unlock Bitwarden, fetch age key, save to ~/.config/sops/age/
+# This is the bootstrap step for sops-nix - run once per machine.
+
+need() { command -v "$1" >/dev/null 2>&1 || { echo "Missing dependency: $1" >&2; exit 1; }; }
+
+need bw
+need jq
+
+AGE_DIR="$HOME/.config/sops/age"
+AGE_KEY_FILE="$AGE_DIR/keys.txt"
+
+# Name of the Bitwarden item containing your age key
+# Store your age private key in a Bitwarden Secure Note named "age-key"
+BW_ITEM_NAME="age-key"
+
+ensure_age_dir() {
+  if [[ ! -d "$AGE_DIR" ]]; then
+    mkdir -p "$AGE_DIR"
+    chmod 700 "$AGE_DIR"
+  fi
+}
+
+ensure_logged_in() {
+  echo "Checking Bitwarden login status..."
+  local status
+  status="$(bw status | jq -r '.status')"
+  echo "Status: $status"
+  if [[ "$status" == "unauthenticated" ]]; then
+    echo "Bitwarden CLI is not logged in. Running: bw login"
+    bw login
+  fi
+}
+
+unlock_vault() {
+  echo "Unlocking vault..."
+  BW_SESSION="$(bw unlock --raw)" || {
+    echo "bw unlock failed." >&2
+    exit 1
+  }
+  if [[ -z "$BW_SESSION" ]]; then
+    echo "Failed to unlock Bitwarden vault (empty session)." >&2
+    exit 1
+  fi
+  export BW_SESSION
+  echo "Vault unlocked."
+}
+
+fetch_age_key() {
+  echo "Syncing vault..."
+  bw sync >/dev/null 2>&1 || true
+
+  echo "Fetching age key from Bitwarden item '$BW_ITEM_NAME'..."
+
+  local item
+  item="$(bw get item "$BW_ITEM_NAME" 2>/dev/null)" || {
+    echo "Error: Could not find Bitwarden item named '$BW_ITEM_NAME'." >&2
+    echo "" >&2
+    echo "Please create a Secure Note in Bitwarden named '$BW_ITEM_NAME'" >&2
+    echo "containing your age private key (the full contents of keys.txt)." >&2
+    echo "" >&2
+    echo "To generate a new age key, run:" >&2
+    echo "  nix-shell -p age --run 'age-keygen'" >&2
+    echo "" >&2
+    echo "Then save the output (including the public key comment) to Bitwarden." >&2
+    exit 1
+  }
+
+  local notes
+  notes="$(echo "$item" | jq -r '.notes // empty')"
+
+  if [[ -z "$notes" ]]; then
+    echo "Error: Bitwarden item '$BW_ITEM_NAME' has no notes field." >&2
+    echo "The age key should be stored in the notes of a Secure Note." >&2
+    exit 1
+  fi
+
+  if [[ "$notes" != *"AGE-SECRET-KEY"* ]]; then
+    echo "Error: The notes don't appear to contain a valid age secret key." >&2
+    echo "Expected to find 'AGE-SECRET-KEY' in the content." >&2
+    exit 1
+  fi
+
+  echo "$notes"
+}
+
+install_key() {
+  local key_content="$1"
+
+  if [[ -f "$AGE_KEY_FILE" ]]; then
+    echo "Warning: $AGE_KEY_FILE already exists."
+    read -rp "Overwrite? [y/N] " confirm
+    if [[ ! "$confirm" =~ ^[Yy]$ ]]; then
+      echo "Aborted."
+      exit 0
+    fi
+  fi
+
+  printf '%s\n' "$key_content" > "$AGE_KEY_FILE"
+  chmod 600 "$AGE_KEY_FILE"
+  echo "Installed age key: $AGE_KEY_FILE"
+
+  # Extract and display public key
+  local public_key
+  public_key="$(grep -o 'age1[a-z0-9]*' <<<"$key_content" | head -1)" || true
+  if [[ -n "$public_key" ]]; then
+    echo ""
+    echo "Public key: $public_key"
+    echo ""
+    echo "Add this public key to your .sops.yaml if not already present."
+  fi
+}
+
+main() {
+  ensure_age_dir
+  ensure_logged_in
+  unlock_vault
+
+  key_content="$(fetch_age_key)"
+  install_key "$key_content"
+
+  echo ""
+  echo "Bootstrap complete! You can now run 'switch' to deploy secrets."
+}
+
+main "$@"

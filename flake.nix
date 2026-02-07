@@ -8,6 +8,11 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = { self, nixpkgs, home-manager, ... }@inputs:
@@ -34,6 +39,9 @@
           home-manager.backupFileExtension = "backup";
           home-manager.users.graeme = import ./modules/home/home.nix;
           home-manager.extraSpecialArgs = { inherit inputs; };
+          home-manager.sharedModules = [
+            inputs.sops-nix.homeManagerModules.sops
+          ];
         }
       ];
     };

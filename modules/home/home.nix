@@ -4,6 +4,23 @@
   home.username = "graeme";
   home.homeDirectory = "/home/graeme";
 
+  # sops-nix configuration
+  sops = {
+    age.keyFile = "/home/graeme/.config/sops/age/keys.txt";
+    defaultSopsFile = ../../secrets/secrets.yaml;
+
+    secrets = {
+      "ssh/id_rsa" = {
+        path = "/home/graeme/.ssh/id_rsa";
+        mode = "0600";
+      };
+      "ssh/id_rsa_pub" = {
+        path = "/home/graeme/.ssh/id_rsa.pub";
+        mode = "0644";
+      };
+    };
+  };
+
   home.stateVersion = "25.11";
 
   # Add scripts directory to PATH

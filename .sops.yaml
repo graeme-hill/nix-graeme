@@ -1,0 +1,8 @@
+keys:
+  - &graeme age1senpy0qxdqp9eqzrgvm0sapwut39wjx2h2x5zp7w9xxxgcqmya8sux3fg9
+
+creation_rules:
+  - path_regex: secrets/.*\.yaml$
+    key_groups:
+      - age:
+          - *graeme
