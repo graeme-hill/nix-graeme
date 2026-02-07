@@ -16,6 +16,7 @@
     bitwarden-desktop
     neovim
     gcc
+    tree-sitter
     jq
     claude-code
     tree
