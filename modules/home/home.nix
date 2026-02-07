@@ -89,6 +89,14 @@
       source = ../../dotfiles/.config/hypr/hyprland.conf;
       force = true;
     };
+    ".config/hypr/hyprlock.conf" = {
+      source = ../../dotfiles/.config/hypr/hyprlock.conf;
+      force = true;
+    };
+    ".config/hypr/hypridle.conf" = {
+      source = ../../dotfiles/.config/hypr/hypridle.conf;
+      force = true;
+    };
     ".config/waybar/config.jsonc" = {
       source = ../../dotfiles/.config/waybar/config.jsonc;
       force = true;
