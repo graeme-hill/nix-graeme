@@ -23,6 +23,7 @@
     gitui
     tig
     ripgrep
+    btop
 
     # Hyprland ecosystem
     waybar
