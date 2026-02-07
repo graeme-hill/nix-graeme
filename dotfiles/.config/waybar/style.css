@@ -134,7 +134,7 @@ window#waybar {
 
 /* Network */
 #network {
-  color: @teal;
+  color: @text;
 }
 
 #network.disconnected {

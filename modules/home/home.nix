@@ -58,7 +58,7 @@
   # Mako notification daemon
   services.mako = {
     enable = true;
-    default-timeout = 5000;  # 5 seconds
+    defaultTimeout = 5000;  # 5 seconds
   };
 
   # Signal dark mode to GTK applications (Chrome, Firefox, etc.)
