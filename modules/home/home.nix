@@ -38,6 +38,28 @@
   # SSH agent (systemd user service)
   services.ssh-agent.enable = true;
 
+  # Signal dark mode to GTK applications (Chrome, Firefox, etc.)
+  gtk = {
+    enable = true;
+    gtk3.extraConfig = {
+      gtk-application-prefer-dark-theme = true;
+    };
+    gtk4.extraConfig = {
+      gtk-application-prefer-dark-theme = true;
+    };
+  };
+
+  # Force overwrite existing GTK config files
+  xdg.configFile."gtk-3.0/settings.ini".force = true;
+  xdg.configFile."gtk-4.0/settings.ini".force = true;
+
+  # Signal dark mode via dconf (for apps that check this)
+  dconf.settings = {
+    "org/gnome/desktop/interface" = {
+      color-scheme = "prefer-dark";
+    };
+  };
+
   # Link dotfiles
   home.file = {
     ".config/hypr/hyprland.conf" = {
