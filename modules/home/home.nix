@@ -18,6 +18,14 @@
         path = "/home/graeme/.ssh/id_rsa.pub";
         mode = "0644";
       };
+      "aws/credentials" = {
+        path = "/home/graeme/.aws/credentials";
+        mode = "0600";
+      };
+      "npmrc" = {
+        path = "/home/graeme/.npmrc";
+        mode = "0600";
+      };
     };
   };
 
@@ -64,6 +72,10 @@
   # Signal dark mode to GTK applications (Chrome, Firefox, etc.)
   gtk = {
     enable = true;
+    iconTheme = {
+      name = "Papirus-Dark";
+      package = pkgs.papirus-icon-theme;
+    };
     gtk3.extraConfig = {
       gtk-application-prefer-dark-theme = true;
     };

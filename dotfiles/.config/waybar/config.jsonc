@@ -100,8 +100,8 @@
     "format": "{icon} {volume}%",
     "format-muted": "󰝟",
     "format-icons": {
-      "headphone": "",
-      "default": ["", "", ""]
+      "headphone": "󰋋",
+      "default": ["󰕿", "󰖀", "󰕾"]
     },
     "on-click": "pavucontrol",
     "scroll-step": 5,

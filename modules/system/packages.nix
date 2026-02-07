@@ -44,6 +44,7 @@
     cliphist
     brightnessctl
     networkmanagerapplet
+    blueman
     pavucontrol
   ];
 }

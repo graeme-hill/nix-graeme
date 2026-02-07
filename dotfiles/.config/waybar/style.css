@@ -77,7 +77,7 @@ window#waybar {
   padding: 2px 6px;
   margin: 0 3px;
   border-radius: 12px;
-  background-color: alpha(@surface0, 0.6);
+  /* background-color: alpha(@surface1, 0.6); */
   transition: all 0.2s ease;
 }
 
@@ -134,7 +134,7 @@ window#waybar {
 
 /* Network */
 #network {
-  color: @text;
+  color: @teal;
 }
 
 #network.disconnected {
@@ -162,12 +162,13 @@ window#waybar {
 
 /* Tray */
 #tray {
-  background-color: alpha(@surface0, 0.6);
+  /* background-color: alpha(@surface0, 0.6); */
+  color: @text;
 }
 
-#tray > .passive {
-  -gtk-icon-effect: dim;
-}
+/* #tray > .passive { */
+/*   -gtk-icon-effect: dim; */
+/* } */
 
 #tray > .needs-attention {
   -gtk-icon-effect: highlight;
