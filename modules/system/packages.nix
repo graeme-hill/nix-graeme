@@ -26,6 +26,9 @@
     tig
     ripgrep
     btop
+    slack
+    slack-cli
+    slack-term
 
     # Hyprland ecosystem
     waybar
