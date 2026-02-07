@@ -38,8 +38,18 @@
       source = ../../dotfiles/.config/hypr/hyprland.conf;
       force = true;
     };
-    ".config/waybar/config.jsonc".source = ../../dotfiles/.config/waybar/config.jsonc;
-    ".config/waybar/style.css".source = ../../dotfiles/.config/waybar/style.css;
+    ".config/waybar/config.jsonc" = {
+      source = ../../dotfiles/.config/waybar/config.jsonc;
+      force = true;
+    };
+    ".config/waybar/style.css" = {
+      source = ../../dotfiles/.config/waybar/style.css;
+      force = true;
+    };
+    ".config/waybar/mocha.css" = {
+      source = ../../dotfiles/.config/waybar/mocha.css;
+      force = true;
+    };
     ".config/ghostty/config" = {
       source = ../../dotfiles/.config/ghostty/config;
       force = true;
