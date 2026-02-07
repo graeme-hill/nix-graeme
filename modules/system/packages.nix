@@ -30,8 +30,6 @@
     # Hyprland ecosystem
     waybar
     wofi
-    dunst
-    mako
     swww
     hyprlock
     hypridle

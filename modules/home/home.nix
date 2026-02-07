@@ -55,6 +55,12 @@
   # SSH agent (systemd user service)
   services.ssh-agent.enable = true;
 
+  # Mako notification daemon
+  services.mako = {
+    enable = true;
+    defaultTimeout = 5000;  # 5 seconds
+  };
+
   # Signal dark mode to GTK applications (Chrome, Firefox, etc.)
   gtk = {
     enable = true;
