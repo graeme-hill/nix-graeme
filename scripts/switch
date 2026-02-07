@@ -1,1 +1,3 @@
+pushd ~/nix-graeme
 sudo nixos-rebuild switch --flake .#thinkpad
+popd
