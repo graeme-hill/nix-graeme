@@ -49,10 +49,10 @@ unlock_vault() {
 }
 
 fetch_age_key() {
-  echo "Syncing vault..."
+  echo "Syncing vault..." >&2
   bw sync >/dev/null 2>&1 || true
 
-  echo "Fetching age key from Bitwarden item '$BW_ITEM_NAME'..."
+  echo "Fetching age key from Bitwarden item '$BW_ITEM_NAME'..." >&2
 
   local item
   item="$(bw get item "$BW_ITEM_NAME" 2>/dev/null)" || {
