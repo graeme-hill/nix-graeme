@@ -99,5 +99,10 @@
       source = ../../dotfiles/.config/ghostty/config;
       force = true;
     };
+    ".config/nvim" = {
+      source = ../../dotfiles/.config/nvim;
+      recursive = true;
+      force = true;
+    };
   };
 }

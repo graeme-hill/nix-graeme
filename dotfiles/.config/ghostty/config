@@ -1,5 +1,4 @@
 # Ghostty configuration
 
 keybind = shift+enter=text:\x1b\r
-background-opacity = 0.2
-background-blur-radius = 20
+background-opacity = 0.9
