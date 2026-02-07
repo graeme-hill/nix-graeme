@@ -29,6 +29,12 @@
     enable = true;
   };
 
+  # direnv for per-project dev environments
+  programs.direnv = {
+    enable = true;
+    nix-direnv.enable = true;
+  };
+
   # SSH agent (systemd user service)
   services.ssh-agent.enable = true;
 
