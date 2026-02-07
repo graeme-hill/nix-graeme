@@ -19,7 +19,7 @@ window#waybar {
 .modules-right {
   background-color: alpha(@base, 0.85);
   border-radius: 15px;
-  padding: 0 6px;
+  padding: 2px 6px;
   margin: 0;
 }
 
@@ -43,7 +43,7 @@ window#waybar {
   padding: 2px 10px;
   margin: 0 2px;
   min-width: 12px;
-  color: @overlay0;
+  color: @text;
   font-size: 14px;
   border-radius: 10px;
   background-color: transparent;
@@ -51,7 +51,7 @@ window#waybar {
 }
 
 #workspaces button.empty {
-  color: @surface2;
+  color: @text;
 }
 
 #workspaces button.active {
