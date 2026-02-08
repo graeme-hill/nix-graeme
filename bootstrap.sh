@@ -111,4 +111,14 @@ echo "Setting password for user 'graeme'..."
 nixos-enter --root /mnt -c "passwd graeme"
 
 echo
+echo "Cloning nix-graeme repo..."
+nixos-enter --root /mnt -c "su - graeme -c 'git clone https://github.com/graeme-hill/nix-graeme.git /home/graeme/nix-graeme'"
+
+echo
+echo "Installing age key for sops-nix secrets..."
+echo "This will prompt you to log in to Bitwarden."
+nixos-enter --root /mnt -c "su - graeme -c '/home/graeme/nix-graeme/scripts/install-age-key'"
+
+echo
 echo "Done! You can now reboot into your new system."
+echo "After reboot, secrets will be available and ~/nix-graeme is ready to use."
