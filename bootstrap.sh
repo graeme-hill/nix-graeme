@@ -9,7 +9,7 @@ echo "----------------"
 echo
 
 # Prompt for disk selection
-read -p "Enter the disk to partition (e.g., /dev/sda): " DISK
+read -p "Enter the disk to partition (e.g., /dev/sda): " DISK < /dev/tty
 
 # Validate disk exists and is a block device
 if [[ ! -b "$DISK" ]]; then
@@ -34,7 +34,7 @@ echo "!!! WARNING !!!"
 echo "This will COMPLETELY ERASE all data on $DISK"
 echo "This action is IRREVERSIBLE"
 echo
-read -p "Type 'yes' to confirm: " CONFIRM
+read -p "Type 'yes' to confirm: " CONFIRM < /dev/tty
 
 if [[ "$CONFIRM" != "yes" ]]; then
   echo "Cancelled."
