@@ -89,6 +89,10 @@ echo
 echo "Generating hardware configuration..."
 nixos-generate-config --root /mnt
 
+# Copy hardware config to installer's /etc/nixos so the flake can find it during install
+mkdir -p /etc/nixos
+cp /mnt/etc/nixos/hardware-configuration.nix /etc/nixos/
+
 echo
 echo "Available hosts: thinkpad, zenbook, desktop"
 read -p "Enter hostname for this machine: " HOSTNAME < /dev/tty
