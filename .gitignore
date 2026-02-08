@@ -1,0 +1,14 @@
+# Editor backup/swap files
+*.swp
+*~
+*.bak
+
+# direnv
+.direnv/
+
+# Nix build output
+result
+result-*
+
+# macOS
+.DS_Store
