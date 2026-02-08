@@ -10,5 +10,8 @@
 result
 result-*
 
+# Auto-generated hardware configs (created by bootstrap.sh)
+hardware-configuration.nix
+
 # macOS
 .DS_Store
