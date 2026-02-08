@@ -29,6 +29,7 @@
     slack
     slack-cli
     slack-term
+    ncdu
 
     # Hyprland ecosystem
     waybar
@@ -46,5 +47,8 @@
     networkmanagerapplet
     blueman
     pavucontrol
+
+    # Virtualization
+    spice-gtk  # Better clipboard/USB support in VMs
   ];
 }
