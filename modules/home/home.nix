@@ -63,9 +63,9 @@
   # Git configuration
   programs.git = {
     enable = true;
-    userName = "Graeme Hill";
-    userEmail = "graemekh@gmail.com";
-    extraConfig = {
+    settings = {
+      user.name = "Graeme Hill";
+      user.email = "graemekh@gmail.com";
       core.editor = "nvim";
     };
   };
