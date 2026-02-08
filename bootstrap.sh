@@ -108,7 +108,7 @@ nixos-install --impure --flake github:graeme-hill/nix-graeme#"$HOSTNAME"
 
 echo
 echo "Setting password for user 'graeme'..."
-nixos-enter --root /mnt -c "passwd graeme"
+nixos-enter --root /mnt -c "passwd graeme" < /dev/tty
 
 echo
 echo "Cloning nix-graeme repo..."
@@ -117,7 +117,7 @@ nixos-enter --root /mnt -c "su - graeme -c 'git clone https://github.com/graeme-
 echo
 echo "Installing age key for sops-nix secrets..."
 echo "This will prompt you to log in to Bitwarden."
-nixos-enter --root /mnt -c "su - graeme -c '/home/graeme/nix-graeme/scripts/install-age-key'"
+nixos-enter --root /mnt -c "su - graeme -c '/home/graeme/nix-graeme/scripts/install-age-key'" < /dev/tty
 
 echo
 echo "Done! You can now reboot into your new system."
