@@ -1,1 +1,1 @@
-sudo nixos-rebuild test --flake .#thinkpad
+sudo nixos-rebuild test --flake .#$(hostname)
