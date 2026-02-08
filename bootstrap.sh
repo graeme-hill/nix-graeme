@@ -89,6 +89,10 @@ echo
 echo "Generating hardware configuration..."
 nixos-generate-config --root /mnt
 
+# Copy hardware config to live ISO's /etc/nixos so --impure can find it
+mkdir -p /etc/nixos
+cp /mnt/etc/nixos/hardware-configuration.nix /etc/nixos/
+
 echo
 echo "Available hosts: thinkpad, zenbook, desktop"
 read -p "Enter hostname for this machine: " HOSTNAME < /dev/tty
@@ -99,16 +103,8 @@ if [[ -z "$HOSTNAME" ]]; then
 fi
 
 echo
-echo "Cloning flake repository..."
-FLAKE_DIR=$(mktemp -d)
-git clone https://github.com/graeme-hill/nix-graeme.git "$FLAKE_DIR"
-
-# Copy hardware config into the flake root
-cp /mnt/etc/nixos/hardware-configuration.nix "$FLAKE_DIR/"
-
-echo
 echo "Installing NixOS with flake configuration '$HOSTNAME'..."
-nixos-install --flake "$FLAKE_DIR#$HOSTNAME"
+nixos-install --impure --flake github:graeme-hill/nix-graeme#"$HOSTNAME"
 
 echo
 echo "Done! You can now reboot into your new system."
