@@ -30,6 +30,7 @@
     slack-cli
     slack-term
     ncdu
+    ventoy
 
     # Hyprland ecosystem
     waybar
