@@ -30,7 +30,7 @@
     slack-cli
     slack-term
     ncdu
-    ventoy-full-qt
+    mediawriter
 
     # Hyprland ecosystem
     waybar
