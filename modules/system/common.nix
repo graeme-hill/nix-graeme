@@ -60,6 +60,16 @@
   # Docker
   virtualisation.docker.enable = true;
 
+  # Libvirt/KVM for virtual machines
+  virtualisation.libvirtd = {
+    enable = true;
+    qemu = {
+      package = pkgs.qemu_kvm;
+      swtpm.enable = true; # TPM emulation for Windows 11
+    };
+  };
+  programs.virt-manager.enable = true;
+
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
