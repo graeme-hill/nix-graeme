@@ -1,10 +1,7 @@
 return {
-  -- import LazyVim's formatting extra (uses conform.nvim)
-  { import = "lazyvim.plugins.extras.formatting.prettier" },
-
   -- ensure prettier is installed via mason
   {
-    "williamboman/mason.nvim",
+    "mason-org/mason.nvim",
     opts = {
       ensure_installed = {
         "prettier",
