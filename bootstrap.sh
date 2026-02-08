@@ -79,7 +79,7 @@ mount "$PART2" /mnt
 
 # Mount EFI
 mkdir -p /mnt/boot
-mount "$PART1" /mnt/boot
+mount -o umask=0077 "$PART1" /mnt/boot
 
 echo
 echo "Disk layout:"
