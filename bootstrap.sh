@@ -107,4 +107,8 @@ echo "Installing NixOS with flake configuration '$HOSTNAME'..."
 nixos-install --impure --flake github:graeme-hill/nix-graeme#"$HOSTNAME"
 
 echo
+echo "Setting password for user 'graeme'..."
+nixos-enter --root /mnt -c "passwd graeme"
+
+echo
 echo "Done! You can now reboot into your new system."
