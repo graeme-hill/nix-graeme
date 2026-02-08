@@ -60,6 +60,16 @@
     nix-direnv.enable = true;
   };
 
+  # Git configuration
+  programs.git = {
+    enable = true;
+    userName = "Graeme Hill";
+    userEmail = "graemekh@gmail.com";
+    extraConfig = {
+      core.editor = "nvim";
+    };
+  };
+
   # SSH agent (systemd user service)
   services.ssh-agent.enable = true;
 
