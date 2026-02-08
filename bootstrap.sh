@@ -45,14 +45,14 @@ echo
 echo "Partitioning $DISK..."
 
 # Create GPT partition table
-parted "$DISK" -- mklabel gpt
+parted -s "$DISK" -- mklabel gpt
 
 # Create EFI system partition (512MB)
-parted "$DISK" -- mkpart ESP fat32 1MB 512MB
-parted "$DISK" -- set 1 esp on
+parted -s "$DISK" -- mkpart ESP fat32 1MB 512MB
+parted -s "$DISK" -- set 1 esp on
 
 # Create root partition (rest of disk)
-parted "$DISK" -- mkpart root ext4 512MB 100%
+parted -s "$DISK" -- mkpart root ext4 512MB 100%
 
 # Determine partition names (nvme uses p1, p2; others use 1, 2)
 if [[ "$DISK" =~ nvme ]]; then
@@ -82,9 +82,25 @@ mkdir -p /mnt/boot
 mount "$PART1" /mnt/boot
 
 echo
-echo "Done! Disk layout:"
+echo "Disk layout:"
 lsblk "$DISK"
 echo
-echo "Next steps:"
-echo "  1. nixos-generate-config --root /mnt"
-echo "  2. nixos-install --flake github:OWNER/nix-graeme#HOSTNAME"
+
+echo "Generating hardware configuration..."
+nixos-generate-config --root /mnt
+
+echo
+echo "Available hosts: thinkpad, zenbook, desktop"
+read -p "Enter hostname for this machine: " HOSTNAME < /dev/tty
+
+if [[ -z "$HOSTNAME" ]]; then
+  echo "Error: hostname cannot be empty"
+  exit 1
+fi
+
+echo
+echo "Installing NixOS with flake configuration '$HOSTNAME'..."
+nixos-install --flake github:graeme-hill/nix-graeme#"$HOSTNAME"
+
+echo
+echo "Done! You can now reboot into your new system."
