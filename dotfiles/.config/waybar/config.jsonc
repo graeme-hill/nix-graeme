@@ -13,7 +13,7 @@
     "tray",
     "bluetooth",
     "network",
-    "pulseaudio",
+    "wireplumber",
     "cpu",
     "memory",
     "battery"
@@ -95,7 +95,7 @@
     "tooltip-format": "{controller_alias}\nDevices connected: {num_connections}",
     "on-click": "blueman-manager"
   },
-  "pulseaudio": {
+  "wireplumber": {
     "format": "{icon} {volume}%",
     "format-muted": "󰝟",
     "format-icons": {
@@ -104,7 +104,7 @@
     },
     "on-click": "pavucontrol",
     "scroll-step": 5,
-    "tooltip-format": "{desc}"
+    "tooltip-format": "{node_name}"
   },
   "tray": {
     "icon-size": 16,
