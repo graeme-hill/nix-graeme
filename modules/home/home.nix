@@ -63,6 +63,7 @@
   # Git configuration
   programs.git = {
     enable = true;
+    lfs.enable = true;
     settings = {
       user.name = "Graeme Hill";
       user.email = "graemekh@gmail.com";

@@ -32,6 +32,8 @@
     ncdu
     mediawriter
     bluetui
+    unzip
+    git-lfs
 
     # Hyprland ecosystem
     waybar
