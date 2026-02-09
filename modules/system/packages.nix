@@ -31,6 +31,7 @@
     slack-term
     ncdu
     mediawriter
+    bluetui
 
     # Hyprland ecosystem
     waybar
