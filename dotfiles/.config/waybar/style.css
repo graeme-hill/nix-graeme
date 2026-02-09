@@ -69,7 +69,7 @@ window#waybar {
 #cpu,
 #memory,
 #battery,
-#pulseaudio,
+#wireplumber,
 #network,
 #bluetooth,
 #clock,
@@ -84,7 +84,7 @@ window#waybar {
 #cpu:hover,
 #memory:hover,
 #battery:hover,
-#pulseaudio:hover,
+#wireplumber:hover,
 #network:hover,
 #bluetooth:hover {
   background-color: alpha(@surface1, 0.8);
@@ -151,12 +151,12 @@ window#waybar {
   color: @overlay0;
 }
 
-/* PulseAudio */
-#pulseaudio {
+/* WirePlumber */
+#wireplumber {
   color: @peach;
 }
 
-#pulseaudio.muted {
+#wireplumber.muted {
   color: @overlay0;
 }
 
