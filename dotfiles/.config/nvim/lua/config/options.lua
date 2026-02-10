@@ -8,3 +8,6 @@ vim.g.autoformat = false
 
 -- Allow project-local .nvim.lua config files
 vim.opt.exrc = true
+
+-- Disable inlay hints by default (toggle with <leader>uh)
+vim.lsp.inlay_hint.enable(false)
