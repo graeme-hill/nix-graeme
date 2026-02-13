@@ -1,5 +1,24 @@
-{ config, pkgs, ... }:
+{ config, pkgs, hostname, ... }:
 
+let
+  # Host-specific Hyprland monitor configuration
+  # Add your monitor settings here for each host
+  # See: https://wiki.hypr.land/Configuring/Monitors/
+  monitorConfig = {
+    desktop = ''
+      # Desktop monitor config - customize as needed
+      monitor=,preferred,auto,1
+    '';
+    zenbook = ''
+      # Zenbook monitor config - customize as needed
+      monitor=,preferred,auto,1.5
+    '';
+    thinkpad = ''
+      # Thinkpad monitor config - customize as needed
+      monitor=,preferred,auto,1.5
+    '';
+  };
+in
 {
   home.username = "graeme";
   home.homeDirectory = "/home/graeme";
@@ -110,6 +129,10 @@
   home.file = {
     ".config/hypr/hyprland.conf" = {
       source = ../../dotfiles/.config/hypr/hyprland.conf;
+      force = true;
+    };
+    ".config/hypr/monitors.conf" = {
+      text = monitorConfig.${hostname} or monitorConfig.desktop;
       force = true;
     };
     ".config/hypr/hyprlock.conf" = {
