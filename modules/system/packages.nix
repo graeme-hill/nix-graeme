@@ -36,6 +36,7 @@
     git-lfs
     vifm
     obs-studio
+    nodejs
 
     # Hyprland ecosystem
     waybar
