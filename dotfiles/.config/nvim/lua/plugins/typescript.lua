@@ -1,26 +1,31 @@
+-- Disable TypeScript/JavaScript inlay hints via lspconfig
 return {
   {
-    "yioneko/nvim-vtsls",
+    "neovim/nvim-lspconfig",
     opts = {
-      settings = {
-        typescript = {
-          inlayHints = {
-            enumMemberValues = { enabled = false },
-            functionLikeReturnTypes = { enabled = false },
-            parameterNames = { enabled = "none" },
-            parameterTypes = { enabled = false },
-            propertyDeclarationTypes = { enabled = false },
-            variableTypes = { enabled = false },
-          },
-        },
-        javascript = {
-          inlayHints = {
-            enumMemberValues = { enabled = false },
-            functionLikeReturnTypes = { enabled = false },
-            parameterNames = { enabled = "none" },
-            parameterTypes = { enabled = false },
-            propertyDeclarationTypes = { enabled = false },
-            variableTypes = { enabled = false },
+      servers = {
+        vtsls = {
+          settings = {
+            typescript = {
+              inlayHints = {
+                enumMemberValues = { enabled = false },
+                functionLikeReturnTypes = { enabled = false },
+                parameterNames = { enabled = "none" },
+                parameterTypes = { enabled = false },
+                propertyDeclarationTypes = { enabled = false },
+                variableTypes = { enabled = false },
+              },
+            },
+            javascript = {
+              inlayHints = {
+                enumMemberValues = { enabled = false },
+                functionLikeReturnTypes = { enabled = false },
+                parameterNames = { enabled = "none" },
+                parameterTypes = { enabled = false },
+                propertyDeclarationTypes = { enabled = false },
+                variableTypes = { enabled = false },
+              },
+            },
           },
         },
       },
