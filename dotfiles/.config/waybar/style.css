@@ -94,7 +94,7 @@ window#waybar {
 #clock {
   color: @text;
   font-weight: bold;
-  background-color: alpha(@surface0, 0.6);
+  background-color: @base;
 }
 
 /* CPU */
