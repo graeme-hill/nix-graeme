@@ -51,18 +51,18 @@ window#waybar {
 }
 
 #workspaces button.empty {
-  color: @text;
+  color: @fadedtext;
 }
 
 #workspaces button.active {
   color: @base;
-  background-color: @lavender;
+  background-color: @text;
   font-weight: bold;
 }
 
 #workspaces button:hover {
-  color: @pink;
-  background-color: alpha(@surface1, 0.5);
+  color: @base;
+  background-color: @text;
 }
 
 /* Common module styling */

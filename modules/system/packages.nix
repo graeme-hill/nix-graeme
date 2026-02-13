@@ -51,6 +51,7 @@
     networkmanagerapplet
     blueman
     pavucontrol
+    hyprmon
 
     # Virtualization
     spice-gtk  # Better clipboard/USB support in VMs

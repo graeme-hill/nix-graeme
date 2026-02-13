@@ -11,3 +11,6 @@ vim.opt.exrc = true
 
 -- Disable inlay hints by default (toggle with <leader>uh)
 vim.lsp.inlay_hint.enable(false)
+
+-- Disable LazyVim's auto root detection - always use the directory nvim was started in
+vim.g.root_spec = { "cwd" }

@@ -6,7 +6,7 @@ local whitelist = {
 
 local function build_find_command()
   if #whitelist == 0 then
-    return { "rg", "--files", "--hidden", "--glob", "!.git" }
+    return { "rg", "--files", "--hidden", "--follow", "--glob", "!.git" }
   end
 
   -- Combine: normal rg search + explicit find for whitelisted paths
@@ -16,7 +16,7 @@ local function build_find_command()
   end
 
   local cmd = string.format(
-    "{ rg --files --hidden --glob '!.git' 2>/dev/null; %s; } | sort -u",
+    "{ rg --files --hidden --follow --glob '!.git' 2>/dev/null; %s; } | sort -u",
     table.concat(whitelist_finds, "; ")
   )
   return { "bash", "-c", cmd }
@@ -26,6 +26,22 @@ return {
   {
     "nvim-telescope/telescope.nvim",
     opts = {
+      defaults = {
+        -- Configure vimgrep_arguments for live_grep to include hidden files
+        vimgrep_arguments = {
+          "rg",
+          "--color=never",
+          "--no-heading",
+          "--with-filename",
+          "--line-number",
+          "--column",
+          "--smart-case",
+          "--hidden", -- Search hidden files
+          "--follow", -- Follow symlinks
+          "--glob",
+          "!.git", -- Exclude .git directory
+        },
+      },
       pickers = {
         find_files = {
           hidden = true,

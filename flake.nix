@@ -38,7 +38,7 @@
           home-manager.useUserPackages = true;
           home-manager.backupFileExtension = "backup";
           home-manager.users.graeme = import ./modules/home/home.nix;
-          home-manager.extraSpecialArgs = { inherit inputs; };
+          home-manager.extraSpecialArgs = { inherit inputs hostname; };
           home-manager.sharedModules = [
             inputs.sops-nix.homeManagerModules.sops
           ];
