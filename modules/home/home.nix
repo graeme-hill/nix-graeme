@@ -7,7 +7,7 @@ let
   monitorConfig = {
     desktop = ''
       # Desktop monitor config - customize as needed
-      monitor=,preferred,auto,1
+      monitor=,preferred,auto,1.25
     '';
     zenbook = ''
       # Zenbook monitor config - customize as needed
@@ -16,6 +16,27 @@ let
     thinkpad = ''
       # Thinkpad monitor config - customize as needed
       monitor=,preferred,auto,1.5
+    '';
+  };
+
+  # Host-specific Hyprland settings (keyboard, input, etc.)
+  # Add per-host customizations here
+  hostConfig = {
+    desktop = ''
+      # Desktop: keyboard already has caps/escape swapped in firmware
+      # so we don't set kb_options here
+    '';
+    zenbook = ''
+      # Zenbook: swap caps lock and escape
+      input {
+        kb_options = caps:swapescape
+      }
+    '';
+    thinkpad = ''
+      # Thinkpad: swap caps lock and escape
+      input {
+        kb_options = caps:swapescape
+      }
     '';
   };
 in
@@ -133,6 +154,10 @@ in
     };
     ".config/hypr/monitors.conf" = {
       text = monitorConfig.${hostname} or monitorConfig.desktop;
+      force = true;
+    };
+    ".config/hypr/host.conf" = {
+      text = hostConfig.${hostname} or hostConfig.desktop;
       force = true;
     };
     ".config/hypr/hyprlock.conf" = {
