@@ -34,6 +34,7 @@
     bluetui
     unzip
     git-lfs
+    vifm
 
     # Hyprland ecosystem
     waybar
