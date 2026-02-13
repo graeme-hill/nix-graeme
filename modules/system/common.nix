@@ -42,7 +42,8 @@
   services.xserver.xkb = {
     layout = "us";
     variant = "";
-    options = "caps:swapescape";
+    # Note: caps/escape swap is handled per-host in Hyprland config (home.nix)
+    # Desktop has hardware swap, zenbook/thinkpad use Hyprland kb_options
   };
 
   # Printing
