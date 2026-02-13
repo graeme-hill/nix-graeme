@@ -35,6 +35,7 @@
     unzip
     git-lfs
     vifm
+    obs-studio
 
     # Hyprland ecosystem
     waybar
