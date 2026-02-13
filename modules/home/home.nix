@@ -66,6 +66,9 @@ in
         path = "/home/graeme/.npmrc";
         mode = "0600";
       };
+      "anthropic_api_key" = {
+        mode = "0600";
+      };
     };
   };
 
@@ -83,6 +86,11 @@ in
     enable = true;
     initExtra = ''
       eval "$(starship init bash)"
+
+      # Export secrets as environment variables
+      if [ -r "${config.sops.secrets."anthropic_api_key".path}" ]; then
+        export ANTHROPIC_API_KEY="$(cat ${config.sops.secrets."anthropic_api_key".path})"
+      fi
     '';
   };
 
