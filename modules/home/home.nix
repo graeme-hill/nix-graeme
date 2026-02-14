@@ -1,44 +1,15 @@
-{ config, pkgs, hostname, ... }:
+{ config, pkgs, osConfig, ... }:
 
 let
-  # Host-specific Hyprland monitor configuration
-  # Add your monitor settings here for each host
-  # See: https://wiki.hypr.land/Configuring/Monitors/
-  monitorConfig = {
-    desktop = ''
-      # Desktop monitor config - customize as needed
-      monitor=,preferred,auto,1.25
-    '';
-    zenbook = ''
-      # Zenbook monitor config - customize as needed
-      monitor=,preferred,auto,1.5
-    '';
-    thinkpad = ''
-      # Thinkpad monitor config - customize as needed
-      monitor=,preferred,auto,1.5
-    '';
-  };
-
-  # Host-specific Hyprland settings (keyboard, input, etc.)
-  # Add per-host customizations here
-  hostConfig = {
-    desktop = ''
-      # Desktop: keyboard already has caps/escape swapped in firmware
-      # so we don't set kb_options here
-    '';
-    zenbook = ''
-      # Zenbook: swap caps lock and escape
+  # Generate host.conf content from the kbOptions setting
+  hostConfContent =
+    if osConfig.myHost.kbOptions != ""
+    then ''
       input {
-        kb_options = caps:swapescape
+        kb_options = ${osConfig.myHost.kbOptions}
       }
-    '';
-    thinkpad = ''
-      # Thinkpad: swap caps lock and escape
-      input {
-        kb_options = caps:swapescape
-      }
-    '';
-  };
+    ''
+    else "";
 in
 {
   home.username = "graeme";
@@ -161,11 +132,11 @@ in
       force = true;
     };
     ".config/hypr/monitors.conf" = {
-      text = monitorConfig.${hostname} or monitorConfig.desktop;
+      text = osConfig.myHost.monitorConfig;
       force = true;
     };
     ".config/hypr/host.conf" = {
-      text = hostConfig.${hostname} or hostConfig.desktop;
+      text = hostConfContent;
       force = true;
     };
     ".config/hypr/hyprlock.conf" = {

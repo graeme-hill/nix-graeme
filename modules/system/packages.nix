@@ -6,7 +6,7 @@
     nerd-fonts.jetbrains-mono
   ];
 
-  # System packages
+  # System packages (shared + host-specific)
   environment.systemPackages = with pkgs; [
     git
     ghostty
@@ -37,6 +37,7 @@
     vifm
     obs-studio
     nodejs
+    vlc
 
     # Hyprland ecosystem
     waybar
@@ -58,5 +59,5 @@
 
     # Virtualization
     spice-gtk  # Better clipboard/USB support in VMs
-  ];
+  ] ++ config.myHost.packages;
 }

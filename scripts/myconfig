@@ -1,0 +1,1 @@
+nvim ~/nix-graeme/hosts/${HOSTNAME}/default.nix

@@ -28,6 +28,7 @@
         ./hosts/${hostname}
 
         # Shared modules
+        ./modules/system/host-options.nix
         ./modules/system/common.nix
         ./modules/system/users.nix
         ./modules/system/packages.nix
@@ -38,7 +39,7 @@
           home-manager.useUserPackages = true;
           home-manager.backupFileExtension = "backup";
           home-manager.users.graeme = import ./modules/home/home.nix;
-          home-manager.extraSpecialArgs = { inherit inputs hostname; };
+          home-manager.extraSpecialArgs = { inherit inputs; };
           home-manager.sharedModules = [
             inputs.sops-nix.homeManagerModules.sops
           ];
