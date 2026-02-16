@@ -6,14 +6,38 @@
     inputs.zwift.nixosModules.zwift
   ];
 
-  # GPU acceleration (required for Steam/gaming)
-  hardware.graphics.enable = true;
+  # GPU acceleration with 32-bit support (needed for most games)
+  hardware.graphics = {
+    enable = true;
+    enable32Bit = true;
+  };
 
-  # Steam with proper FHS environment
-  programs.steam.enable = true;
+  # AMD GPU specific settings
+  hardware.amdgpu = {
+    initrd.enable = true;  # Early KMS
+    amdvlk = {
+      enable = true;
+      support32Bit.enable = true;
+    };
+  };
+
+  # Steam with extra compatibility
+  programs.steam = {
+    enable = true;
+    gamescopeSession.enable = true;
+    extraCompatPackages = with pkgs; [
+      proton-ge-bin
+    ];
+  };
+
+  # GameMode (CPU governor optimization)
+  programs.gamemode.enable = true;
 
   # Gamescope compositor for gaming (FSR, frame limiting, etc.)
-  programs.gamescope.enable = true;
+  programs.gamescope = {
+    enable = true;
+    capSysNice = true;
+  };
 
   # Zwift cycling app (runs in container)
   programs.zwift.enable = true;
@@ -26,6 +50,8 @@
 
     packages = with pkgs; [
       discord
+      mangohud
+      vulkan-tools
     ];
   };
 }
