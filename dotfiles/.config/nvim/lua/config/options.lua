@@ -17,3 +17,6 @@ vim.g.root_spec = { "cwd" }
 
 -- Keep cursor centered vertically
 vim.opt.scrolloff = 999
+
+-- Disable markdown syntax concealment (show ```backticks```, **asterisks**, etc.)
+vim.opt.conceallevel = 0

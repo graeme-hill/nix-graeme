@@ -1,5 +1,5 @@
 # Ghostty configuration
 
 keybind = shift+enter=text:\x1b\r
-background-opacity = 1.0
+background-opacity = 0.8
 theme = Adventure
