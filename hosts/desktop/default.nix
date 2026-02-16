@@ -1,8 +1,9 @@
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 
 {
   imports = [
     /etc/nixos/hardware-configuration.nix
+    inputs.zwift.nixosModules.zwift
   ];
 
   # GPU acceleration (required for Steam/gaming)
@@ -13,6 +14,9 @@
 
   # Gamescope compositor for gaming (FSR, frame limiting, etc.)
   programs.gamescope.enable = true;
+
+  # Zwift cycling app (runs in container)
+  programs.zwift.enable = true;
 
   myHost = {
     # Desktop monitor config

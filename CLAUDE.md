@@ -12,3 +12,9 @@ here.
 
 There is a tool in in scripts/ called `install-age-key` that allows the user to get their
 age key from bitwarden. Then secrets are decrypted using that key and sops-nix.
+
+## Host-specific configuration
+
+The nix files in modules/ are meant to be universal config, while the subdirectories in
+hosts/ contain host-specific configuration so that it is possible to have some settings,
+packages, etc that are available only on certain systems/hosts.

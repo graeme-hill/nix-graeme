@@ -40,7 +40,8 @@
       "inputs": {
         "home-manager": "home-manager",
         "nixpkgs": "nixpkgs",
-        "sops-nix": "sops-nix"
+        "sops-nix": "sops-nix",
+        "zwift": "zwift"
       }
     },
     "sops-nix": {
@@ -60,6 +61,26 @@
       "original": {
         "owner": "Mic92",
         "repo": "sops-nix",
+        "type": "github"
+      }
+    },
+    "zwift": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1771095725,
+        "narHash": "sha256-TPywmyD6m3sxijsh0RbjYAl3n3LUAZhXCiOcoA8h0bo=",
+        "owner": "netbrain",
+        "repo": "zwift",
+        "rev": "244b27cbc61c887d0ae123082fecf98c6f70693c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "netbrain",
+        "repo": "zwift",
         "type": "github"
       }
     }
