@@ -13,13 +13,7 @@
   };
 
   # AMD GPU specific settings
-  hardware.amdgpu = {
-    initrd.enable = true;  # Early KMS
-    amdvlk = {
-      enable = true;
-      support32Bit.enable = true;
-    };
-  };
+  hardware.amdgpu.initrd.enable = true;  # Early KMS
 
   # Steam with extra compatibility
   programs.steam = {
