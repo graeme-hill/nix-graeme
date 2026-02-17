@@ -6,8 +6,8 @@
     inputs.zwift.nixosModules.zwift
   ];
 
-  # Gaming-optimized kernel (xanmod has better scheduling and lower latency)
-  boot.kernelPackages = pkgs.linuxPackages_xanmod_latest;
+  # Gaming-optimized kernel (zen has better scheduling and lower latency)
+  boot.kernelPackages = pkgs.linuxPackages_zen;
 
   # RDNA 4 stability fix + AMD P-State for better CPU scaling
   boot.kernelParams = [
