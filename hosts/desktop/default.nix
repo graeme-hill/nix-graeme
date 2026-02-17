@@ -96,7 +96,9 @@
 
     packages = with pkgs; [
       discord
+      furmark
       mangohud
+      nvtopPackages.amd
       vulkan-tools
     ];
   };
