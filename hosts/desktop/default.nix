@@ -9,6 +9,15 @@
   # Gaming-optimized kernel (xanmod has better scheduling and lower latency)
   boot.kernelPackages = pkgs.linuxPackages_xanmod_latest;
 
+  # RDNA 4 stability fix + AMD P-State for better CPU scaling
+  boot.kernelParams = [
+    "split_lock_detect=off"
+    "amd_pstate=active"
+  ];
+
+  # Force performance governor for gaming
+  powerManagement.cpuFreqGovernor = "performance";
+
   # Gaming kernel/memory optimizations (Bazzite-style)
   boot.kernel.sysctl = {
     "vm.max_map_count" = 2147483642;  # Bazzite default, needed for many Proton games
@@ -40,6 +49,9 @@
   # AMD GPU specific settings
   hardware.amdgpu.initrd.enable = true;  # Early KMS
 
+  # Controller/Steam hardware udev rules
+  hardware.steam-hardware.enable = true;
+
   # Steam with extra compatibility
   programs.steam = {
     enable = true;
@@ -60,6 +72,21 @@
 
   # Zwift cycling app (runs in container)
   programs.zwift.enable = true;
+
+  # AMD GPU shader precompilation optimizations
+  environment.variables = {
+    RADV_PERFTEST = "gpl,nggc";
+  };
+
+  # Extra gaming packages (Bazzite-style)
+  environment.systemPackages = with pkgs; [
+    protonup-qt
+    lutris
+    heroic
+    bottles
+    prismlauncher
+    vkbasalt
+  ];
 
   myHost = {
     # Desktop monitor config
