@@ -117,6 +117,7 @@ in
   # Force overwrite existing GTK config files
   xdg.configFile."gtk-3.0/settings.ini".force = true;
   xdg.configFile."gtk-4.0/settings.ini".force = true;
+  home.file.".gtkrc-2.0".force = true;
 
   # Signal dark mode via dconf (for apps that check this)
   dconf.settings = {
