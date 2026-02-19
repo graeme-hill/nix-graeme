@@ -72,7 +72,10 @@
   # Gamescope compositor for gaming (FSR, frame limiting, etc.)
   programs.gamescope = {
     enable = true;
-    capSysNice = true;
+    capSysNice = false;
+    # args = [
+    #   "--force-grab-cursor"
+    # ];
   };
 
   # Zwift cycling app (runs in container)
