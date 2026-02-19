@@ -35,18 +35,58 @@ return {
 
       -- Custom "implement this" command
       vim.keymap.set("v", "<leader>ax", function()
-        vim.cmd("'<,'>CodeCompanion #buffer implement this")
-      end, { desc = "Implement selection" })
+        -- Get selection range
+        local start_line = vim.fn.line("'<")
+        local end_line = vim.fn.line("'>")
+        local selection = table.concat(vim.fn.getline(start_line, end_line), "\n")
+        local full_buffer = table.concat(vim.fn.getline(1, "$"), "\n")
+        local filetype = vim.bo.filetype
+
+        local prompt = string.format(
+          [[Complete or fix the selected code. Follow any conventions, patterns, or instructions in the rest of the file.
+
+FULL FILE CONTEXT (%s):
+```%s
+%s
+```
+
+SELECTED CODE TO COMPLETE OR FIX (lines %d-%d):
+```%s
+%s
+```
+
+Complete or fix this selection, following any instructions or patterns from the file context.]],
+          filetype, filetype, full_buffer, start_line, end_line, filetype, selection
+        )
+
+        require("codecompanion").inline({
+          args = prompt,
+          mode = "v",
+        })
+      end, { desc = "Complete or fix selection" })
 
       vim.keymap.set("n", "<leader>ax", function()
         local line = vim.fn.line(".")
-        local col = vim.fn.col(".")
         local current_line = vim.fn.getline(".")
+        local full_buffer = table.concat(vim.fn.getline(1, "$"), "\n")
+        local filetype = vim.bo.filetype
+
         local prompt = string.format(
-          "#buffer implement the code at line %d (cursor at column %d). The line content is: %s",
-          line, col, current_line
+          [[Implement the code at line %d. Follow any conventions, patterns, or instructions in the file.
+
+FULL FILE (%s):
+```%s
+%s
+```
+
+Implement code at line %d, which currently contains: %s]],
+          line, filetype, filetype, full_buffer, line, current_line
         )
-        vim.cmd("CodeCompanion " .. prompt)
+
+        require("codecompanion").inline({
+          args = prompt,
+          mode = "n",
+        })
       end, { desc = "Implement at cursor" })
     end,
     keys = {
