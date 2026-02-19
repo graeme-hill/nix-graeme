@@ -4,23 +4,23 @@
   imports = [
     /etc/nixos/hardware-configuration.nix
     inputs.zwift.nixosModules.zwift
+    inputs.nix-gaming.nixosModules.platformOptimizations
+    inputs.nix-gaming.nixosModules.pipewireLowLatency
   ];
 
   # Gaming-optimized kernel (zen has better scheduling and lower latency)
   boot.kernelPackages = pkgs.linuxPackages_zen;
 
-  # RDNA 4 stability fix + AMD P-State for better CPU scaling
+  # AMD P-State for better CPU scaling
   boot.kernelParams = [
-    "split_lock_detect=off"
     "amd_pstate=active"
   ];
 
   # Force performance governor for gaming
   powerManagement.cpuFreqGovernor = "performance";
 
-  # Gaming kernel/memory optimizations (Bazzite-style)
+  # ZRAM-specific sysctl (nix-gaming handles vm.max_map_count and split_lock)
   boot.kernel.sysctl = {
-    "vm.max_map_count" = 2147483642;  # Bazzite default, needed for many Proton games
     "vm.swappiness" = 180;            # Higher for zram
     "vm.page-cluster" = 0;            # Better for zram random access
     "vm.compaction_proactiveness" = 0; # Reduce latency spikes
@@ -52,14 +52,19 @@
   # Controller/Steam hardware udev rules
   hardware.steam-hardware.enable = true;
 
-  # Steam with extra compatibility
+  # Steam with extra compatibility and SteamOS-style platform optimizations
   programs.steam = {
     enable = true;
     gamescopeSession.enable = true;
+    platformOptimizations.enable = true;
+    protontricks.enable = true;
     extraCompatPackages = with pkgs; [
       proton-ge-bin
     ];
   };
+
+  # Low-latency audio for gaming
+  services.pipewire.lowLatency.enable = true;
 
   # GameMode (CPU governor optimization)
   programs.gamemode.enable = true;
