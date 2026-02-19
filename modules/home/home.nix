@@ -169,5 +169,9 @@ in
       recursive = true;
       force = true;
     };
+    ".config/tmux/tmux.conf" = {
+      source = ../../dotfiles/.config/tmux/tmux.conf;
+      force = true;
+    };
   };
 }
