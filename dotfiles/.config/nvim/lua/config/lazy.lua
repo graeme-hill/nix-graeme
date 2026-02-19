@@ -21,6 +21,7 @@ require("lazy").setup({
     -- import any lazyvim extras (must be before your own plugins)
     { import = "lazyvim.plugins.extras.lang.typescript" },
     { import = "lazyvim.plugins.extras.formatting.prettier" },
+    { import = "lazyvim.plugins.extras.linting.eslint" },
     -- import/override with your plugins
     { import = "plugins" },
   },
