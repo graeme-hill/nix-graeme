@@ -4,6 +4,10 @@
   # Fonts
   fonts.packages = with pkgs; [
     nerd-fonts.jetbrains-mono
+    nerd-fonts.fira-code
+    nerd-fonts.departure-mono
+    nerd-fonts.inconsolata
+    nerd-fonts.ubuntu-sans
   ];
 
   # System packages (shared + host-specific)
