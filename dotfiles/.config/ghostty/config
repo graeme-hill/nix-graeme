@@ -1,5 +1,7 @@
 # Ghostty configuration
 
+font-family = UbuntuMono Nerd Font
 keybind = shift+enter=text:\x1b\r
 background-opacity = 0.8
 theme = Adventure
+font-size = 11
