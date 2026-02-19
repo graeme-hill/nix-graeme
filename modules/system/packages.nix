@@ -14,10 +14,8 @@
   environment.systemPackages = with pkgs; [
     git
     ghostty
-    google-chrome
     zed-editor
     bitwarden-cli
-    bitwarden-desktop
     neovim
     gcc
     tree-sitter
@@ -39,9 +37,8 @@
     unzip
     git-lfs
     vifm
-    obs-studio
     nodejs
-    vlc
+    tmux
 
     # Hyprland ecosystem
     waybar
