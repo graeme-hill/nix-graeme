@@ -86,16 +86,6 @@
     RADV_PERFTEST = "gpl,nggc";
   };
 
-  # Extra gaming packages (Bazzite-style)
-  environment.systemPackages = with pkgs; [
-    protonup-qt
-    lutris
-    heroic
-    bottles
-    prismlauncher
-    vkbasalt
-  ];
-
   myHost = {
     # Desktop monitor config
     monitorConfig = "monitor=,preferred,auto,1.25";
@@ -108,6 +98,16 @@
       mangohud
       nvtopPackages.amd
       vulkan-tools
+      obs-studio
+      vlc
+      bitwarden-desktop
+      google-chrome
+      protonup-qt
+      lutris
+      heroic
+      bottles
+      prismlauncher
+      vkbasalt
     ];
   };
 }
