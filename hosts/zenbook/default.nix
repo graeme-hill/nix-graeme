@@ -15,11 +15,6 @@
     # Swap caps lock and escape
     kbOptions = "caps:swapescape";
 
-    packages = with pkgs; [
-      obs-studio
-      vlc
-      bitwarden-desktop
-      google-chrome
-    ];
+    packages = [];
   };
 }

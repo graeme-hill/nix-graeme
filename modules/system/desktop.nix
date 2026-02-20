@@ -69,6 +69,12 @@
     pavucontrol
     hyprmon
 
+    # Common desktop apps
+    google-chrome
+    bitwarden-desktop
+    vlc
+    obs-studio
+
     # Virtualization (GUI)
     spice-gtk
   ];
