@@ -34,8 +34,17 @@
   # XDG portal (needed for screen sharing, file pickers, etc.)
   xdg.portal = {
     enable = true;
-    config.common.default = "hyprland";
-    extraPortals = [ pkgs.xdg-desktop-portal-hyprland ];
+    extraPortals = [
+      pkgs.xdg-desktop-portal-hyprland
+      pkgs.xdg-desktop-portal-gtk
+    ];
+    config = {
+      hyprland = {
+        default = [ "hyprland" "gtk" ];
+        "org.freedesktop.impl.portal.Screenshot" = "hyprland";
+        "org.freedesktop.impl.portal.ScreenCast" = "hyprland";
+      };
+    };
   };
 
   # Keyboard
