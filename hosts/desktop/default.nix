@@ -3,6 +3,7 @@
 {
   imports = [
     /etc/nixos/hardware-configuration.nix
+    ../../modules/system/desktop.nix
     inputs.zwift.nixosModules.zwift
     inputs.nix-gaming.nixosModules.platformOptimizations
     inputs.nix-gaming.nixosModules.pipewireLowLatency
@@ -72,10 +73,7 @@
   # Gamescope compositor for gaming (FSR, frame limiting, etc.)
   programs.gamescope = {
     enable = true;
-    capSysNice = false;
-    # args = [
-    #   "--force-grab-cursor"
-    # ];
+    capSysNice = true;
   };
 
   # Zwift cycling app (runs in container)

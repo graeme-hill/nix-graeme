@@ -23,38 +23,6 @@
   time.timeZone = "America/Vancouver";
   i18n.defaultLocale = "en_CA.UTF-8";
 
-  # Display manager and desktop
-  services.displayManager.sddm.enable = true;
-  services.displayManager.sddm.wayland.enable = true;
-  services.desktopManager.plasma6.enable = true;
-
-  # Hyprland
-  programs.hyprland.enable = true;
-
-  # XDG portal (needed for screen sharing, file pickers, etc.)
-  xdg.portal = {
-    enable = true;
-    extraPortals = [
-      pkgs.xdg-desktop-portal-hyprland
-      pkgs.xdg-desktop-portal-gtk
-    ];
-    config = {
-      hyprland = {
-        default = [ "hyprland" "gtk" ];
-        "org.freedesktop.impl.portal.Screenshot" = "hyprland";
-        "org.freedesktop.impl.portal.ScreenCast" = "hyprland";
-      };
-    };
-  };
-
-  # Keyboard
-  services.xserver.xkb = {
-    layout = "us";
-    variant = "";
-    # Note: caps/escape swap is handled per-host in Hyprland config (home.nix)
-    # Desktop has hardware swap, zenbook/thinkpad use Hyprland kb_options
-  };
-
   # Printing
   services.printing.enable = true;
 

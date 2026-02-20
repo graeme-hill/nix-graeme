@@ -1,20 +1,9 @@
 { config, pkgs, ... }:
 
 {
-  # Fonts
-  fonts.packages = with pkgs; [
-    nerd-fonts.jetbrains-mono
-    nerd-fonts.fira-code
-    nerd-fonts.departure-mono
-    nerd-fonts.inconsolata
-    nerd-fonts.ubuntu-sans
-  ];
-
   # System packages (shared + host-specific)
   environment.systemPackages = with pkgs; [
     git
-    ghostty
-    zed-editor
     bitwarden-cli
     neovim
     gcc
@@ -28,37 +17,14 @@
     tig
     ripgrep
     btop
-    slack
     slack-cli
     slack-term
     ncdu
-    mediawriter
     bluetui
     unzip
     git-lfs
     vifm
     nodejs
     tmux
-
-    # Hyprland ecosystem
-    waybar
-    wofi
-    swww
-    hyprlock
-    hypridle
-    hyprshot
-    grim
-    slurp
-    wf-recorder
-    wl-clipboard
-    cliphist
-    brightnessctl
-    networkmanagerapplet
-    blueman
-    pavucontrol
-    hyprmon
-
-    # Virtualization
-    spice-gtk  # Better clipboard/USB support in VMs
   ] ++ config.myHost.packages;
 }
