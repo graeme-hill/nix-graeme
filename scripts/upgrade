@@ -1,3 +1,4 @@
 pushd ~/nix-graeme
-sudo nixos-rebuild switch --upgrade --impure --flake .#$(hostname)
+nix flake update
+sudo nixos-rebuild switch --impure --flake .#$(hostname)
 popd

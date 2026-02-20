@@ -72,7 +72,10 @@
   # Gamescope compositor for gaming (FSR, frame limiting, etc.)
   programs.gamescope = {
     enable = true;
-    capSysNice = true;
+    capSysNice = false;
+    # args = [
+    #   "--force-grab-cursor"
+    # ];
   };
 
   # Zwift cycling app (runs in container)
@@ -82,16 +85,6 @@
   environment.variables = {
     RADV_PERFTEST = "gpl,nggc";
   };
-
-  # Extra gaming packages (Bazzite-style)
-  environment.systemPackages = with pkgs; [
-    protonup-qt
-    lutris
-    heroic
-    bottles
-    prismlauncher
-    vkbasalt
-  ];
 
   myHost = {
     # Desktop monitor config
@@ -105,6 +98,16 @@
       mangohud
       nvtopPackages.amd
       vulkan-tools
+      obs-studio
+      vlc
+      bitwarden-desktop
+      google-chrome
+      protonup-qt
+      lutris
+      heroic
+      bottles
+      prismlauncher
+      vkbasalt
     ];
   };
 }
