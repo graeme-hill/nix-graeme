@@ -5,6 +5,7 @@
 
 {
   # Display manager (greeter runs on X11; Hyprland session is still Wayland)
+  services.xserver.enable = true;
   services.displayManager.sddm.enable = true;
 
   # Hyprland

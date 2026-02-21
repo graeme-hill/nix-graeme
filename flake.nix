@@ -61,7 +61,7 @@
     nixosConfigurations = {
       thinkpad = mkHost "thinkpad";
       zenbook = mkHost "zenbook";
-      desktop = mkHost "desktop";
+      donkey = mkHost "donkey";
     };
   };
 }
