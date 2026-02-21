@@ -4,9 +4,8 @@
 { config, pkgs, ... }:
 
 {
-  # Display manager
+  # Display manager (greeter runs on X11; Hyprland session is still Wayland)
   services.displayManager.sddm.enable = true;
-  services.displayManager.sddm.wayland.enable = true;
 
   # Hyprland
   programs.hyprland.enable = true;
