@@ -64,9 +64,11 @@
   programs.gamemode.enable = true;
 
   # Gamescope compositor for gaming (FSR, frame limiting, etc.)
+  # Note: capSysNice doesn't work inside Steam's bwrap sandbox (NixOS FHS limitation).
+  # Process priority is handled by ananicy-cpp with cachyos rules instead.
   programs.gamescope = {
     enable = true;
-    capSysNice = true;
+    capSysNice = false;
   };
 
   # Zwift cycling app (runs in container)

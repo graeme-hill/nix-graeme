@@ -5,16 +5,10 @@
 
 {
   options.myHost = {
-    monitorConfig = lib.mkOption {
-      type = lib.types.str;
-      description = "Hyprland monitor configuration";
-      example = "monitor=,preferred,auto,1.5";
-    };
-
     kbOptions = lib.mkOption {
       type = lib.types.str;
       default = "";
-      description = "Keyboard options for Hyprland input config (e.g., caps:swapescape)";
+      description = "XKB keyboard options (e.g., caps:swapescape)";
       example = "caps:swapescape";
     };
 

@@ -4,41 +4,21 @@
 { config, pkgs, ... }:
 
 {
-  # Display manager (greeter runs on X11; Hyprland session is still Wayland)
+  # Display manager (SDDM is KDE's default; uses Breeze theme with Plasma)
   services.xserver.enable = true;
   services.displayManager.sddm = {
     enable = true;
-    theme = "where_is_my_sddm_theme";
-    extraPackages = with pkgs.kdePackages; [
-      qt5compat
-    ];
+    wayland.enable = true;
   };
 
-  # Hyprland
-  programs.hyprland.enable = true;
-
-  # XDG portal (needed for screen sharing, file pickers, etc.)
-  xdg.portal = {
-    enable = true;
-    extraPortals = [
-      pkgs.xdg-desktop-portal-hyprland
-      pkgs.xdg-desktop-portal-gtk
-    ];
-    config = {
-      hyprland = {
-        default = [ "hyprland" "gtk" ];
-        "org.freedesktop.impl.portal.Screenshot" = "hyprland";
-        "org.freedesktop.impl.portal.ScreenCast" = "hyprland";
-      };
-    };
-  };
+  # KDE Plasma 6
+  services.desktopManager.plasma6.enable = true;
 
   # Keyboard
   services.xserver.xkb = {
     layout = "us";
     variant = "";
-    # Note: caps/escape swap is handled per-host in Hyprland config (home.nix)
-    # Desktop has hardware swap, zenbook/thinkpad use Hyprland kb_options
+    options = config.myHost.kbOptions;
   };
 
   # Fonts
@@ -52,29 +32,10 @@
 
   # Desktop packages
   environment.systemPackages = with pkgs; [
-    where-is-my-sddm-theme
     ghostty
     zed-editor
     slack
     mediawriter
-
-    # Hyprland ecosystem
-    waybar
-    wofi
-    swww
-    hyprlock
-    hypridle
-    hyprshot
-    grim
-    slurp
-    wf-recorder
-    wl-clipboard
-    cliphist
-    brightnessctl
-    networkmanagerapplet
-    blueman
-    pavucontrol
-    hyprmon
 
     # Common desktop apps
     google-chrome

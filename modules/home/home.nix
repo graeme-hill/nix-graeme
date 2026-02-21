@@ -1,16 +1,5 @@
 { config, pkgs, osConfig, ... }:
 
-let
-  # Generate host.conf content from the kbOptions setting
-  hostConfContent =
-    if osConfig.myHost.kbOptions != ""
-    then ''
-      input {
-        kb_options = ${osConfig.myHost.kbOptions}
-      }
-    ''
-    else "";
-in
 {
   home.username = "graeme";
   home.homeDirectory = "/home/graeme";
@@ -93,19 +82,12 @@ in
   # SSH agent (systemd user service)
   services.ssh-agent.enable = true;
 
-  # Mako notification daemon
-  services.mako = {
-    enable = true;
-    settings.default-timeout = 5000;  # 5 seconds
-  };
-
-  # Signal dark mode to GTK applications (Chrome, Firefox, etc.)
+  # Cursor theme
   home.pointerCursor = {
     name = "Adwaita";
     package = pkgs.adwaita-icon-theme;
     size = 24;
     gtk.enable = true;
-    hyprcursor.enable = true;
   };
 
   gtk = {
@@ -136,38 +118,6 @@ in
 
   # Link dotfiles
   home.file = {
-    ".config/hypr/hyprland.conf" = {
-      source = ../../dotfiles/.config/hypr/hyprland.conf;
-      force = true;
-    };
-    ".config/hypr/monitors.conf" = {
-      text = osConfig.myHost.monitorConfig;
-      force = true;
-    };
-    ".config/hypr/host.conf" = {
-      text = hostConfContent;
-      force = true;
-    };
-    ".config/hypr/hyprlock.conf" = {
-      source = ../../dotfiles/.config/hypr/hyprlock.conf;
-      force = true;
-    };
-    ".config/hypr/hypridle.conf" = {
-      source = ../../dotfiles/.config/hypr/hypridle.conf;
-      force = true;
-    };
-    ".config/waybar/config.jsonc" = {
-      source = ../../dotfiles/.config/waybar/config.jsonc;
-      force = true;
-    };
-    ".config/waybar/style.css" = {
-      source = ../../dotfiles/.config/waybar/style.css;
-      force = true;
-    };
-    ".config/waybar/mocha.css" = {
-      source = ../../dotfiles/.config/waybar/mocha.css;
-      force = true;
-    };
     ".config/ghostty/config" = {
       source = ../../dotfiles/.config/ghostty/config;
       force = true;
