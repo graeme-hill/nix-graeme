@@ -6,7 +6,10 @@
 {
   # Display manager (greeter runs on X11; Hyprland session is still Wayland)
   services.xserver.enable = true;
-  services.displayManager.sddm.enable = true;
+  services.displayManager.sddm = {
+    enable = true;
+    theme = "where_is_my_sddm_theme";
+  };
 
   # Hyprland
   programs.hyprland.enable = true;
@@ -46,6 +49,7 @@
 
   # Desktop packages
   environment.systemPackages = with pkgs; [
+    where-is-my-sddm-theme
     ghostty
     zed-editor
     slack
