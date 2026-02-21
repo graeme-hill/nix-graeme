@@ -10,8 +10,21 @@
     inputs.nix-gaming.nixosModules.pipewireLowLatency
   ];
 
-  # Gaming-optimized kernel (zen has better scheduling and lower latency)
-  boot.kernelPackages = pkgs.linuxPackages_zen;
+  # CachyOS kernel overlay and binary cache
+  nixpkgs.overlays = [ inputs.nix-cachyos-kernel.overlays.pinned ];
+  nix.settings = {
+    substituters = [ "https://attic.xuyh0120.win/lantian" ];
+    trusted-public-keys = [ "lantian:EeAUQ+W+6r7EtwnmYjeVwx5kOGEBpjlBfPlzGlTNvHc=" ];
+  };
+
+  # CachyOS kernel (BORE scheduler, AMD patches, sched_ext, ThinLTO)
+  boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-latest;
+
+  # Valve's LAVD scheduler via sched_ext (latency-aware, designed for gaming)
+  services.scx = {
+    enable = true;
+    scheduler = "scx_lavd";
+  };
 
   # Force performance governor for gaming
   powerManagement.cpuFreqGovernor = "performance";

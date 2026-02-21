@@ -23,6 +23,11 @@
       url = "github:fufexan/nix-gaming";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nix-cachyos-kernel = {
+      url = "github:xddxdd/nix-cachyos-kernel/release";
+      # Do NOT use nixpkgs.follows — must use pinned nixpkgs to match patches
+    };
   };
 
   outputs = { self, nixpkgs, home-manager, ... }@inputs:
