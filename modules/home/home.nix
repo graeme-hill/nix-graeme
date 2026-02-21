@@ -100,6 +100,14 @@ in
   };
 
   # Signal dark mode to GTK applications (Chrome, Firefox, etc.)
+  home.pointerCursor = {
+    name = "Adwaita";
+    package = pkgs.adwaita-icon-theme;
+    size = 24;
+    gtk.enable = true;
+    hyprcursor.enable = true;
+  };
+
   gtk = {
     enable = true;
     iconTheme = {
