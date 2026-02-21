@@ -49,6 +49,7 @@
   # Steam with extra compatibility and SteamOS-style platform optimizations
   programs.steam = {
     enable = true;
+    gamescopeSession.enable = true;
     platformOptimizations.enable = true;
     protontricks.enable = true;
     extraCompatPackages = with pkgs; [
