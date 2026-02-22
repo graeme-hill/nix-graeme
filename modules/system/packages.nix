@@ -26,5 +26,7 @@
     vifm
     nodejs
     tmux
+    zig
+    zls
   ] ++ config.myHost.packages;
 }
