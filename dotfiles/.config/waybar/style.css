@@ -9,7 +9,7 @@
 }
 
 window#waybar {
-  background-color: transparent;
+  background-color: #000000;
   color: @text;
 }
 
@@ -17,7 +17,7 @@ window#waybar {
 .modules-left,
 .modules-center,
 .modules-right {
-  background-color: alpha(@base, 0.85);
+  background-color: #000000;
   border-radius: 15px;
   padding: 2px 6px;
   margin: 0;
