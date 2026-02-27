@@ -57,6 +57,7 @@
     zed-editor
     slack
     mediawriter
+    vscode
 
     # Hyprland ecosystem
     waybar
