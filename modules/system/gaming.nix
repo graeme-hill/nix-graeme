@@ -27,13 +27,16 @@
   };
 
   # CachyOS kernel (BORE scheduler, AMD patches, sched_ext, ThinLTO)
-  boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-latest;
+  # boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-latest;
+  # Temporarily using 6.12 LTS to test amdgpu regression
+  boot.kernelPackages = pkgs.linuxPackages_6_12;
 
   # Valve's LAVD scheduler via sched_ext (latency-aware, designed for gaming)
-  services.scx = {
-    enable = true;
-    scheduler = "scx_lavd";
-  };
+  # Disabled while testing 6.12 LTS (sched_ext requires 6.17+)
+  # services.scx = {
+  #   enable = true;
+  #   scheduler = "scx_lavd";
+  # };
 
   # Force performance governor for gaming
   powerManagement.cpuFreqGovernor = "performance";
