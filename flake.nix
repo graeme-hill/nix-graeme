@@ -28,6 +28,12 @@
       url = "github:xddxdd/nix-cachyos-kernel/release";
       # Do NOT use nixpkgs.follows — must use pinned nixpkgs to match patches
     };
+
+    # Pinned nixpkgs for mesa 25.3.4 — used to test mesa regression
+    # Remove this input once testing is complete
+    nixpkgs-mesa-pinned = {
+      url = "github:NixOS/nixpkgs/e3f053a65da0356f3c84b218e41830f003834e76";
+    };
   };
 
   outputs = { self, nixpkgs, home-manager, ... }@inputs:
