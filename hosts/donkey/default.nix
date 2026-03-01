@@ -13,7 +13,7 @@
     "amd_pstate=active"
     "amdgpu.runpm=0"       # Disable dGPU runtime PM (prevents dual-GPU power cycling crashes)
     "amdgpu.gfx_off=0"    # Disable GFX power gating
-    "amdgpu.gpu_recovery=0" # Disable GPU reset (prevents kernel crash on failed recovery)
+    "amdgpu.gpu_recovery=1" # Enable GPU reset recovery (needs 6.13+ for RDNA 4)
   ];
 
   # AMD GPU specific settings

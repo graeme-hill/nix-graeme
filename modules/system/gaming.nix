@@ -27,7 +27,7 @@
   };
 
   # CachyOS kernel (BORE scheduler, AMD patches, sched_ext, ThinLTO)
-  boot.kernelPackages = pkgs.linuxPackages_6_12;
+  boot.kernelPackages = pkgs.linuxPackages_latest;
 
   # Valve's LAVD scheduler via sched_ext (latency-aware, designed for gaming)
   # Disabled while testing 6.12 LTS (sched_ext requires 6.17+)
