@@ -14,6 +14,7 @@
     "amdgpu.runpm=0"       # Disable dGPU runtime PM (prevents dual-GPU power cycling crashes)
     "amdgpu.gfx_off=0"    # Disable GFX power gating
     "amdgpu.gpu_recovery=1" # Enable GPU reset recovery (needs 6.13+ for RDNA 4)
+    "split_lock_detect=off" # Disable split lock traps (Steam triggers hundreds)
   ];
 
   # AMD GPU specific settings

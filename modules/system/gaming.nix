@@ -11,15 +11,8 @@
   ];
 
   # CachyOS kernel overlay and binary cache
-  # Mesa 25.3.4 overlay — pin mesa to test for regression in 26.0.0
-  # Remove the mesa overlay once testing is complete
   nixpkgs.overlays = [
     inputs.nix-cachyos-kernel.overlays.pinned
-    (final: prev: let
-      mesaPinned = inputs.nixpkgs-mesa-pinned.legacyPackages.${final.stdenv.hostPlatform.system};
-    in {
-      mesa = mesaPinned.mesa;
-    })
   ];
   nix.settings = {
     substituters = [ "https://attic.xuyh0120.win/lantian" ];
