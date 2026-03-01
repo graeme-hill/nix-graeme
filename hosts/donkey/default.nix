@@ -19,9 +19,7 @@
 
   # AMD GPU specific settings
   hardware.amdgpu.initrd.enable = true;  # Early KMS
-  environment.variables = {
-    RADV_PERFTEST = "gpl,nggc";
-  };
+  environment.variables = {};
 
   myHost = {
     # Desktop monitor config
