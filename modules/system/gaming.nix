@@ -28,8 +28,8 @@
 
   # CachyOS kernel (BORE scheduler, AMD patches, sched_ext, ThinLTO)
   # boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-latest;
-  # Temporarily using 6.12 LTS to test amdgpu regression
-  boot.kernelPackages = pkgs.linuxPackages_6_12;
+  # Bazzite stable kernel (one point version back from unstable's 6.12)
+  boot.kernelPackages = pkgs.linuxPackages_6_11;
 
   # Valve's LAVD scheduler via sched_ext (latency-aware, designed for gaming)
   # Disabled while testing 6.12 LTS (sched_ext requires 6.17+)
